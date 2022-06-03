@@ -12,7 +12,7 @@ import ReviewCard from "./ReviewCard.js";
 import Loader from "../layout/loader/Loader";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
-// import { addItemsToCart } from "../../actions/cartAction";
+import { addItemsToCart } from "../../actions/cartAction";
 import {
   Dialog,
   DialogActions,
@@ -63,10 +63,10 @@ const ProductDetails = ({ match }) => {
     setQuantity(qty);
   };
 
-//   const addToCartHandler = () => {
-//     dispatch(addItemsToCart(match.params.id, quantity));
-//     alert.success("Item Added To Cart");
-//   };
+  const addToCartHandler = () => {
+    dispatch(addItemsToCart(id, quantity));
+    alert.success("Item Added To Cart");
+  };
 
   const submitReviewToggle = () => {
     open ? setOpen(false) : setOpen(true);
@@ -77,7 +77,7 @@ const ProductDetails = ({ match }) => {
 
     myForm.set("rating", rating);
     myForm.set("comment", comment);
-    myForm.set("productId", match.params.id);
+    myForm.set("productId", id);
 
     dispatch(newReview(myForm));
 
@@ -146,7 +146,7 @@ const ProductDetails = ({ match }) => {
                   </div>
                   <button
                     disabled={product.Stock < 1 ? true : false}
-                    // onClick={addToCartHandler}
+                    onClick={addToCartHandler}
                   >
                     Add to Cart
                   </button>
@@ -222,58 +222,3 @@ const ProductDetails = ({ match }) => {
 export default ProductDetails;
 
 
-// import React, { Fragment, useEffect, useState } from "react";
-// import { useParams } from 'react-router-dom';
-// import Carousel from "react-material-ui-carousel";
-// import "./ProductDetails.css";
-// import { useSelector, useDispatch } from "react-redux";
-// import MetaData from "../layout/MetaData";
-// import {
-//     clearErrors,
-//     getProductDetails,
-//     newReview,
-//   } from "../../actions/productAction";
-
-// const ProductDetails = ({match}) => {
-//     const dispatch = useDispatch();
-
-//     const { id } = useParams();
-//     console.log(id);
-
-//   const { product, loading, error } = useSelector(
-//     (state) => state.productDetails
-//   );
-
-
-//   useEffect(()=>{
-
-//     dispatch(getProductDetails(id));
-
-
-//   }, [dispatch, id])
-
-
-//   return(
-//     <Fragment>
-//     <MetaData title={`${product.name} -- ECOMMERCE`} />
-//     <div className="ProductDetails">
-//       <div>
-//         <Carousel>
-//           {product.images &&
-//             product.images.map((item, i) => (
-//               <img
-//                 className="CarouselImage"
-//                 key={i}
-//                 src={item.url}
-//                 alt={`${i} Slide`}
-//               />
-//             ))}
-//         </Carousel>
-//       </div>
-//       </div>
-//       </Fragment>
-
-//   )
-// }
-
-// export default ProductDetails;

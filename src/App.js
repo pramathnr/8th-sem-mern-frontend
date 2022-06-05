@@ -27,7 +27,17 @@ import Cart from "./component/Cart/Cart";
 import Shipping from "./component/Cart/Shipping";
 import ConfirmOrder from "./component/Cart/ConfirmOrder";
 import Payment from "./component/Cart/Payment";
+import OrderSuccess from "./component/Cart/OrderSuccess";
 import axios from "axios";
+import Dashboard from "./component/Admin/Dashboard.js";
+import ProductList from "./component/Admin/ProductList.js";
+import NewProduct from "./component/Admin/NewProduct";
+import UpdateProduct from "./component/Admin/UpdateProduct";
+import OrderList from "./component/Admin/OrderList";
+import ProcessOrder from "./component/Admin/ProcessOrder";
+import UsersList from "./component/Admin/UserList";
+import UpdateUser from "./component/Admin/UpdateUser";
+import ProductReviews from "./component/Admin/ProductReviews";
 
 
 
@@ -75,17 +85,28 @@ function App() {
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         {isAuthenticated && <Route exact path="/orders" element={<MyOrders />} />}
-        {isAuthenticated && <Route exact path="/orders" element={<MyOrders />} />}
         {isAuthenticated && <Route exact path="/order/:id" element={<OrderDetails />} />}
         <Route exact path="/login" element={<LoginSignUp />} />
         <Route exact path="/cart" element={<Cart />} />
         {isAuthenticated && <Route exact path="/login/shipping" element={<Shipping />} />}
         {isAuthenticated && <Route exact path="/order/confirm" element={<ConfirmOrder />} />}
+        {isAuthenticated && <Route exact path="/success" element={<OrderSuccess />} />}
+        {isAuthenticated && <Route path="/admin/dashboard" element={<Dashboard/>} />}
+        {isAuthenticated && <Route path="/admin/products" element={<ProductList/>} />}
+        {isAuthenticated && <Route path="/admin/product" element={<NewProduct/>} />}
+        {isAuthenticated && <Route path="/admin/product/:id" element={<UpdateProduct/>} />}
+        {isAuthenticated && <Route path="/admin/orders" element={<OrderList/>} />}
+        {isAuthenticated && <Route path="/admin/order/:id" element={<ProcessOrder/>} />}
+        {isAuthenticated && <Route path="/admin/users" element={<UsersList/>} />}
+        {isAuthenticated && <Route path="/admin/users" element={<UsersList/>} />}
+        {isAuthenticated && <Route path="/admin/user/:id" element={<UpdateUser/>} />}
+        {isAuthenticated && <Route path="/admin/reviews" element={<ProductReviews/>} />}
         {/* {stripeApiKey && (
           <Elements stripe={loadStripe(stripeApiKey)}>
             {isAuthenticated && <Route exact path="/process/payment" element={<Payment />} />}
           </Elements>
         )} */}
+        
 
       </Routes>
 
